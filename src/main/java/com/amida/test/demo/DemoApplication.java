@@ -6,21 +6,24 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SpringBootApplication
 public class DemoApplication {
-	
-	
+
 	@RequestMapping("/")
 	String home() {
 		return "welcom to amida's page";
 	}
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
-	
-	
+
+	@RequestMapping("/json")
+	public Customer greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+		return new Customer(name, name);
+	}
 }
